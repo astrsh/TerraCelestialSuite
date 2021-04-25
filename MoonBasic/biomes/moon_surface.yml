@@ -1,0 +1,18 @@
+id: "MOON_SURFACE"
+extends: BASE
+vanilla: end_barrens
+
+noise-equation: "-y + 64"
+
+elevation:
+  equation: "(craters(x, z)+1)/2 * 100"
+
+palette:
+  - "BLOCK:minecraft:stone": 255
+  - "BLOCK:minecraft:bedrock": 0
+
+slant:
+  threshold: 1
+  palette:
+    - "BLOCK:minecraft:basalt": 255
+    - "BLOCK:minecraft:bedrock": 0

@@ -1,0 +1,62 @@
+id: MOON_BASIC
+author: Astrash
+version: "1.0.0"
+
+noise:
+  craters:
+    type: FBM
+    octaves: 5
+    lacunarity: 1.9
+    gain: 0.5
+    function:
+      type: EXPRESSION
+      equation: |
+        envelope(
+          (celldist(x, z) + radiusOffset) * edgeSharpness,
+          insideDepth,  insidePinch,
+          outsideDepth, outsidePinch
+        )
+      variables:
+      
+        radiusOffset: 0.95 # Between 0.8 - 0.99 for best results
+        edgeSharpness: 20 # Greater values give sharper transitions
+
+        # Depth = how deep the area is (should be between 0 and 2)
+        # The depth inside should generally be greater than the outside
+
+        # Pinch = how quickly the edge converges towards the depth
+        # Higher values give steeper transitions
+
+        # Area outside crater
+        outsideDepth: 0.75
+        outsidePinch: 0.5
+
+        # Area inside crater
+        insideDepth:  2
+        insidePinch:  2
+        
+      functions:
+        celldist:
+          type: DOMAINWARP
+          amplitude: 6
+          warp:
+            type: FBM
+            octaves: 3
+            function:
+              type: OPENSIMPLEX2
+              frequency: 0.015
+          function:
+            type: CELLULAR
+            frequency: 0.003
+      expressions:
+        envelope:
+          arguments: [x, depth1, pinch1, depth2, pinch2]
+          function: |
+            if(x < 0,
+              depth1 * (2^( x * pinch1) - 1) + 1,
+              depth2 * (2^(-x * pinch2) - 1) + 1
+            )
+
+biomes:
+  type: SINGLE
+  biome: MOON_SURFACE
