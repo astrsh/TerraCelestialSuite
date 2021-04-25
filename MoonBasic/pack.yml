@@ -38,7 +38,7 @@ noise:
       functions:
         celldist:
           type: DOMAINWARP
-          amplitude: 6
+          amplitude: 10
           warp:
             type: FBM
             octaves: 3
