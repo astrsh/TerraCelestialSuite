@@ -1,0 +1,22 @@
+id: "CRATER_SLANT"
+layers:
+  - materials:
+      - "minecraft:basalt": 4
+      - "minecraft:stone": 1
+      - "minecraft:stone_slab": 1
+    noise:
+      dimensions: 3
+      type: Expression
+      equation: |
+        func(x, y*10, z)
+      functions:
+        func:
+          dimensions: 3
+          type: OpenSimplex2
+          frequency: 0.03
+      warp:
+        type: WhiteNoise
+    layers: 6
+  - materials:
+      - "minecraft:basalt": 1
+    layers: 1
