@@ -2,10 +2,15 @@ id: "MOON_SURFACE"
 extends: BASE
 vanilla: end_barrens
 
-noise-equation: "-y + 64"
+variables:
+  base: 64          # Base terrain height
+  craterHeight: 100 # How high craters will go above the base height
+
+
+noise-equation: "-y + base"
 
 elevation:
-  equation: "(craters(x, z)+1)/2 * 100"
+  equation: "(craters(x, z)+1)/2 * craterHeight"
 
 palette:
   - CRATER_FLAT: 255
